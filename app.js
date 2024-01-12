@@ -199,7 +199,7 @@ globePivot.add(aravalliPin);
 
 // Add user data to the pin for clicking
 aravalliPin.userData = {
-  url: "https://www.google.com/maps/d/edit?hl=en&mid=1NT5N-1k8DYSnvzveHQA_f5XGDuhwJ6M&ll=26.860283559017063%2C75.52528935000001&z=7",
+  url: "https://www.google.com/maps/d/edit?mid=1-6cXNwJUFsUglewHlook0Psr6dRtiVA&ll=26.063087798475998%2C78.96536896427438&z=13",
 };
 clickableObjects.push(aravalliPin);
 
