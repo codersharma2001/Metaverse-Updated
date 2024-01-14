@@ -93,8 +93,8 @@ function createImagePlane(width, height, texture) {
 }
 
 // Set up a light source
-var light = new THREE.PointLight(0xffffff, 3, 0);
-light.position.set(0, 50, 50);
+var light = new THREE.PointLight(0xffffff, 2, 0);
+light.position.set(0, -50, 50);
 scene.add(light);
 
 // Set up ambient light
