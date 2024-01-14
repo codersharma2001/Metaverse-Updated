@@ -315,7 +315,7 @@ function loadFont(url) {
 function createTextSprite(text) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
-  context.font = "Bold 40px Arial";
+  context.font = "Bold 80px Arial";
   context.fillStyle = "white";
   context.textAlign = "center";
   context.fillText(text, canvas.width / 2, canvas.height / 2);
