@@ -323,7 +323,7 @@ function createTextSprite(text) {
   const texture = new THREE.CanvasTexture(canvas);
   const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
   const sprite = new THREE.Sprite(spriteMaterial);
-  sprite.scale.set(1, 0.2, 1); // Adjust the scale as needed
+  sprite.scale.set(1.5, 1, 1.5); // Adjust the scale as needed
 
   return sprite;
 }
