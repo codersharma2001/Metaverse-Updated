@@ -312,48 +312,6 @@ function loadFont(url) {
 }
 
 // Generate the cubical plots
-function generateCubicalPlots(names, gridSize, innerRadius, outerRadius) {
-  const plotSize = 3;
-  const margin = 0.1;
-  const cubeGeometry = new THREE.BoxGeometry(plotSize, plotSize, plotSize);
-  const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
-
-  names.forEach((name, index) => {
-    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-
-    const radius = innerRadius + (outerRadius - innerRadius) / 2;
-    const angleIncrement = (2 * Math.PI) / gridSize;
-    const angle = index * angleIncrement;
-
-    const x = radius * Math.cos(angle) - plotSize / 2;
-    const z = radius * Math.sin(angle) - plotSize / 2;
-    cube.position.set(x, plotSize / 2, z);
-    scene.add(cube);
-
-    // Add clickable image to the top of the cube
-    const textureLoader = new THREE.TextureLoader();
-    const imageUrl = 'https://upload.wikimedia.org/wikipedia/en/f/ff/Amity_University_logo.png'; // Replace with the URL of the image you want to display
-    textureLoader.load(imageUrl, (texture) => {
-      const imageWidth = 1;
-      const imageHeight = 1;
-      const imageGeometry = new THREE.PlaneGeometry(imageWidth, imageHeight);
-      const imageMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-      const imagePlane = new THREE.Mesh(imageGeometry, imageMaterial);
-      imagePlane.userData = {
-        url: "https://webdev--regal-sunflower-a0a530.netlify.app/", // Replace with the desired URL for this image
-      };
-      
-      imagePlane.position.y = plotSize;
-      cube.add(imagePlane);
-      clickableObjects.push(imagePlane);
-
-
-      // Add click event listener to the image
-    
-    });
-  });
-}
-
 // function generateCubicalPlots(names, gridSize, innerRadius, outerRadius) {
 //   const plotSize = 3;
 //   const margin = 0.1;
@@ -372,24 +330,65 @@ function generateCubicalPlots(names, gridSize, innerRadius, outerRadius) {
 //     cube.position.set(x, plotSize / 2, z);
 //     scene.add(cube);
 
-//     // Add "1 Hectare" text to the top of the cube
-//     const textGeometry = new THREE.TextGeometry("1 Hectare", {
-//       font: new THREE.FontLoader().load('https://threejsfundamentals.org/threejs/resources/threejs/fonts/helvetiker_regular.typeface.json'),
-//       size: 0.5, // Adjust the size of the text
-//       height: 0.1, // Adjust the height of the text
-//     });
-//     const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-//     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-//     textMesh.position.set(0, plotSize, 0); // Position the text on top of the cube
-//     cube.add(textMesh);
+//     // Add clickable image to the top of the cube
+//     const textureLoader = new THREE.TextureLoader();
+//     const imageUrl = 'https://upload.wikimedia.org/wikipedia/en/f/ff/Amity_University_logo.png'; // Replace with the URL of the image you want to display
+//     textureLoader.load(imageUrl, (texture) => {
+//       const imageWidth = 1;
+//       const imageHeight = 1;
+//       const imageGeometry = new THREE.PlaneGeometry(imageWidth, imageHeight);
+//       const imageMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+//       const imagePlane = new THREE.Mesh(imageGeometry, imageMaterial);
+//       imagePlane.userData = {
+//         url: "https://webdev--regal-sunflower-a0a530.netlify.app/", // Replace with the desired URL for this image
+//       };
+      
+//       imagePlane.position.y = plotSize;
+//       cube.add(imagePlane);
+//       clickableObjects.push(imagePlane);
 
-//     // Add click event listener to the cube
-//     cube.userData = {
-//       url: "https://webdev--regal-sunflower-a0a530.netlify.app/", // Replace with the desired URL for this cube
-//     };
-//     clickableObjects.push(cube);
+
+//       // Add click event listener to the image
+    
+//     });
 //   });
 // }
+
+function generateCubicalPlots(names, gridSize, innerRadius, outerRadius) {
+  const plotSize = 3;
+  const margin = 0.1;
+  const cubeGeometry = new THREE.BoxGeometry(plotSize, plotSize, plotSize);
+  const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+
+  names.forEach((name, index) => {
+    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+
+    const radius = innerRadius + (outerRadius - innerRadius) / 2;
+    const angleIncrement = (2 * Math.PI) / gridSize;
+    const angle = index * angleIncrement;
+
+    const x = radius * Math.cos(angle) - plotSize / 2;
+    const z = radius * Math.sin(angle) - plotSize / 2;
+    cube.position.set(x, plotSize / 2, z);
+    scene.add(cube);
+
+    // Add "1 Hectare" text to the top of the cube
+    const textGeometry = new THREE.TextGeometry("1 Hectare", {
+      size: 0.5, // Adjust the size of the text
+      height: 0.1, // Adjust the height of the text
+    });
+    const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+    textMesh.position.set(0, plotSize, 0); // Position the text on top of the cube
+    cube.add(textMesh);
+
+    // Add click event listener to the cube
+    cube.userData = {
+      url: "https://webdev--regal-sunflower-a0a530.netlify.app/", // Replace with the desired URL for this cube
+    };
+    clickableObjects.push(cube);
+  });
+}
 
 
 // Set up raycaster for click detection
