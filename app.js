@@ -311,7 +311,24 @@ function loadFont(url) {
   });
 }
 
-// Generate the cubical plots
+// Add this function to create a TextSprite
+function createTextSprite(text) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  context.font = "Bold 40px Arial";
+  context.fillStyle = "white";
+  context.textAlign = "center";
+  context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+  const sprite = new THREE.Sprite(spriteMaterial);
+  sprite.scale.set(1, 0.2, 1); // Adjust the scale as needed
+
+  return sprite;
+}
+
+// Update the original function
 function generateCubicalPlots(names, gridSize, innerRadius, outerRadius) {
   const plotSize = 3;
   const margin = 0.1;
@@ -330,27 +347,19 @@ function generateCubicalPlots(names, gridSize, innerRadius, outerRadius) {
     cube.position.set(x, plotSize / 2, z);
     scene.add(cube);
 
-    // Add clickable image to the top of the cube
-    const textureLoader = new THREE.TextureLoader();
-    const imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Illustration_of_One_Hectare.png'; // Replace with the URL of the image you want to display
-    textureLoader.load(imageUrl, (texture) => {
-      const imageWidth = 1;
-      const imageHeight = 1;
-      const imageGeometry = new THREE.PlaneGeometry(imageWidth, imageHeight);
-      const imageMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-      const imagePlane = new THREE.Mesh(imageGeometry, imageMaterial);
-    
-      
-      imagePlane.position.y = plotSize;
-      cube.add(imagePlane);
-      clickableObjects.push(imagePlane);
+    // Add "1 Hectare" text to the top of the cube using TextSprite
+    const textSprite = createTextSprite("1 Hectare");
+    textSprite.position.set(0, plotSize + 0.1, 0); // Adjust the position as needed
+    cube.add(textSprite);
 
-
-      // Add click event listener to the image
-    
-    });
+    // Add click event listener to the cube
+    cube.userData = {
+      url: "https://webdev--regal-sunflower-a0a530.netlify.app/", // Replace with the desired URL for this cube
+    };
+    clickableObjects.push(cube);
   });
 }
+
 
 // function generateCubicalPlots(names, gridSize, innerRadius, outerRadius) {
 //   const plotSize = 3;
