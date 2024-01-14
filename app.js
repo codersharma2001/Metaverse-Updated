@@ -318,12 +318,12 @@ function createTextSprite(text) {
   context.font = "Bold 100px Arial";
   context.fillStyle = "white";
   context.textAlign = "center";
-  context.fillText(text, canvas.width , canvas.height);
+  context.fillText(text, canvas.width/2 , canvas.height/2);
 
   const texture = new THREE.CanvasTexture(canvas);
   const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
   const sprite = new THREE.Sprite(spriteMaterial);
-  sprite.scale.set(1.5, 1, 1.5); // Adjust the scale as needed
+  sprite.scale.set(5, 5, 5); // Adjust the scale as needed
 
   return sprite;
 }
