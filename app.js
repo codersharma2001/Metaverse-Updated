@@ -315,7 +315,7 @@ function loadFont(url) {
 function createTextSprite(text) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
-  context.font = "Bold 100px Arial";
+  context.font = "Bold 60px Arial";
   context.fillStyle = "white";
   context.textAlign = "center";
   context.fillText(text, canvas.width/2 , canvas.height/2);
@@ -348,7 +348,7 @@ function generateCubicalPlots(names, gridSize, innerRadius, outerRadius) {
     scene.add(cube);
 
     // Add "1 Hectare" text to the top of the cube using TextSprite
-    const textSprite = createTextSprite("1 Hectare");
+    const textSprite = createTextSprite("1Hectare");
     textSprite.position.set(0, plotSize + 0.1, 0); // Adjust the position as needed
     cube.add(textSprite);
 
